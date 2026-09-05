@@ -16,8 +16,8 @@ ssh slpod 'git config --global protocol.version 1; git config --global http.vers
 
 echo "==> 3/4  rebuild the two venvs (uv cache lives on /workspace, so this is fast)"
 ssh slpod 'cd /workspace/sl-attribution
-  nohup bash setup_train_env.sh   > logs/setup_train.log     2>&1
-  nohup bash rebuild_diffing_env.sh > logs/rebuild_diffing.log 2>&1
+  nohup bash scripts/setup_train_env.sh   > logs/setup_train.log     2>&1
+  nohup bash scripts/setup_diffing_env.sh > logs/rebuild_diffing.log 2>&1
   grep -hE "^torch |cuda True|^vllm " logs/setup_train.log logs/rebuild_diffing.log | tail -4'
 
 echo "==> 4/4  re-create adapter symlinks (adapter_id with >1 slash gets split by configs.py)"

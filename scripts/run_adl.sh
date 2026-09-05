@@ -14,10 +14,12 @@ ORGANISM="${2:-subliminal_learning_cat}"
 if [ -z "$STAGE" ]; then echo "usage: run_adl.sh core|aps|steering|relevance [organism]" >&2; exit 2; fi
 
 export PATH="/root/.local/bin:$PATH"
-export HF_HOME=/workspace/hf_home
+export HF_HOME="${HF_HOME:-/workspace/hf_home}"
 export HF_HUB_ENABLE_HF_TRANSFER=1
-export UV_PROJECT_ENVIRONMENT=/opt/venv
-cd /workspace/sl-attribution/diffing-toolkit
+export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-/opt/venv}"
+# defaults are the pod layout of docs/00; overridable so a checkout elsewhere works
+ROOT="${ROOT:-/workspace/sl-attribution}"
+cd "${REPO:-$ROOT/diffing-toolkit}"
 
 FINEWEB=science-of-finetuning/fineweb-1m-sample
 
